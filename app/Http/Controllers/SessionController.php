@@ -157,6 +157,15 @@ class SessionController extends Controller
             ], 400);
         }
 
+        $session = SubscriberSession::where('key', $request->session_key)->first();
+
+        if(!$session) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Invalid session', 
+            ], 400);
+        }
+
         $existingSubscriber = Subscriber::where('email', $request->email)->first();
         if($existingSubscriber) {
             $session = SubscriberSession::where('key', $request->session_key)->first();
