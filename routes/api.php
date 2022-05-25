@@ -29,4 +29,4 @@ Route::post('/newsletter/subscribe', [SessionController::class, 'subscribeToNews
 Route::post('/newsletter/update', [SessionController::class, 'updateNewsletter']);
 Route::post('/newsletter', [SessionController::class, 'newsletter']);
 
-Route::get('/blog/{category_id?}', [ApiController::class, 'blog']);
+Route::get('/blog/{post_id?}', [ApiController::class, 'blog']);
