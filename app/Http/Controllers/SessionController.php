@@ -60,18 +60,26 @@ class SessionController extends Controller
             $message->subscriber_id = $subscriberSession->subscriber_id;
         } else {
             // create subscriber and asociate the message 
-            $subscriber = new Subscriber;
-            $subscriber->name = $request->name;
-            $subscriber->company = $request->company;
-            $subscriber->email = $request->email;
-            $subscriber->phone = $request->phone;
-            $subscriber->newsletter = $request->newsletter;
-            $subscriber->save();
-
-            $subscriberSession->subscriber_id = $subscriber->id;
-            $subscriberSession->save();
-            
-            $message->subscriber_id = $subscriber->id;
+            $existing2Subscriber = Subscriber::where('email', $request->email)->first();
+            if($existing2Subscriber) {
+                $subscriberSession->subscriber_id = $existing2Subscriber->id;
+                $subscriberSession->save();
+                
+                $message->subscriber_id = $existing2Subscriber->id;  
+            } else {
+                $subscriber = new Subscriber;
+                $subscriber->name = $request->name;
+                $subscriber->company = $request->company;
+                $subscriber->email = $request->email;
+                $subscriber->phone = $request->phone;
+                $subscriber->newsletter = $request->newsletter;
+                $subscriber->save();
+    
+                $subscriberSession->subscriber_id = $subscriber->id;
+                $subscriberSession->save();
+                
+                $message->subscriber_id = $subscriber->id;
+            }
         }
         $message->save();
 
@@ -220,23 +228,22 @@ class SessionController extends Controller
     // }
     // even if he goes to a specific article send "blog"
     public function updateSession(Request $request) {
-        $validator = Validator::make($request->all(), [
-            'pages' => 'required|array',
-            'articles' => 'required|array',
-            'session_key' => 'required|string|max:21'
-        ]);
+        // $validator = Validator::make($request->all(), [
+        //     'pages' => 'required|array',
+        //     'articles' => 'required|array',
+        //     'session_key' => 'required|string|max:21'
+        // ]);
 
-        if($validator->fails()) {
-            return response()->json([
-                'success' => false,
-                'message' => 'Make sure the payload format is right',
-            ], 400);
-        }
-
-        $session = SubscriberSession::where('key', $request->session_key)->first();
+        // if($validator->fails()) {
+        //     return response()->json([
+        //         'success' => false,
+        //         'message' => 'Make sure the payload format is right',
+        //     ], 400);
+        // }
+        $session = SubscriberSession::where('key', $request->activity['session_key'])->first();
             
         if($session) {
-            $session->activity = json_encode($request);
+            $session->activity = json_encode($request->activity);
             $session->save();
 
             return response()->json([

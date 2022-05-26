@@ -19,7 +19,7 @@
         role="button" 
         aria-expanded="false" 
         aria-controls="collapseExample">
-          {{ $category->name }}
+          {{ $category->name }} ({{count($category->articles)}})
         </a>
       </p>
       <div class="collapse" id="collapseExample{{ $category->id }}">

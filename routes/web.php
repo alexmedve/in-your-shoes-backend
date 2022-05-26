@@ -28,3 +28,4 @@ Route::post('/blog/post/{id?}', [BlogController::class, 'createPost']);
 Route::get('/blog/post/{id}/delete', [BlogController::class, 'deleteArticle']);
 
 Route::get('/analytics', [AnalyticsController::class, 'index']);
+Route::get('/analytics/{subscriber_id}', [AnalyticsController::class, 'subscriberProfile']);
