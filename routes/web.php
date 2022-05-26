@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BlogController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,3 +21,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/blog', [BlogController::class, 'index']);
+Route::get('/blog/post/{id?}', [BlogController::class, 'addPost']);
+Route::post('/blog/post/{id?}', [BlogController::class, 'createPost']);
+Route::get('/blog/post/{id}/delete', [BlogController::class, 'deleteArticle']);

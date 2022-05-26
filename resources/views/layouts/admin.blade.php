@@ -117,18 +117,18 @@
         <!-- Navigation -->
         <ul class="navbar-nav">
           <li class="nav-item">
-            <a href="{{ url('/admin/home') }}" class="nav-link @if(Request::url() == url('/admin/home')) active @endif">
+            <a href="{{ url('/home') }}" class="nav-link @if(Request::url() == url('/home')) active @endif">
               <i class="fe fe-home"></i> Dashboard
             </a>
           </li>
           <li class="nav-item">
-            <a href="{{ url('/admin/messages') }}" class="nav-link @if(Request::url() == url('/admin/messages')) active @endif">
-              <i class="fe fe-list"></i> Subscribers
+            <a href="{{ url('/blog') }}" class="nav-link @if(Request::url() == url('/blog')) active @endif">
+              <i class="fe fe-list"></i> Blog
             </a>
           </li>
           <li class="nav-item">
-            <a href="{{ url('/admin/blog') }}" class="nav-link @if(Request::url() == url('/admin/blog')) active @endif">
-              <i class="fe fe-clipboard"></i> Blog
+            <a href="{{ url('/analytics') }}" class="nav-link @if(Request::url() == url('/analytics')) active @endif">
+              <i class="fe fe-pie-chart"></i> analytics
             </a>
           </li>
         </ul>
