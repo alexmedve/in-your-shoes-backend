@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AnalyticsController;
 use App\Http\Controllers\BlogController;
 use Illuminate\Support\Facades\Route;
 
@@ -25,3 +26,5 @@ Route::get('/blog', [BlogController::class, 'index']);
 Route::get('/blog/post/{id?}', [BlogController::class, 'addPost']);
 Route::post('/blog/post/{id?}', [BlogController::class, 'createPost']);
 Route::get('/blog/post/{id}/delete', [BlogController::class, 'deleteArticle']);
+
+Route::get('/analytics', [AnalyticsController::class, 'index']);

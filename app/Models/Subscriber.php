@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Subscriber extends Model
 {
     use HasFactory;
+
+    public function sessions() {
+        return $this->hasMany(SubscriberSession::class);
+    }
 }
